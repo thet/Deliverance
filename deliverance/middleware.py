@@ -205,6 +205,8 @@ document.cookie = 'jsEnabled=1; expires=__DATE__; path=/';
         Currently this is used only by RuleSet.get_theme
         """
         assert url is not None
+        force_external = \
+                'deliv_force_external' in urlparse.urlsplit(url).query or False
         if url.lower().startswith('file:'):
             if not display_local_files(orig_req):
                 ## FIXME: not sure if this applies generally; some
@@ -230,7 +232,8 @@ document.cookie = 'jsEnabled=1; expires=__DATE__; path=/';
             f.close()
             return subresp
 
-        elif url.startswith(orig_req.application_url + '/'):
+        elif not force_external and\
+                url.startswith(orig_req.application_url + '/'):
             subreq = orig_req.copy_get()
             subreq.environ['deliverance.subrequest_original_environ'] = orig_req.environ
             new_path_info = url[len(orig_req.application_url):]
