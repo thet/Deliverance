@@ -265,7 +265,7 @@ document.cookie = 'jsEnabled=1; expires=__DATE__; path=/';
                 log.debug(self,
                           'Internal request for %s was not 200 OK; retrying as external request.' % url)
             
-        ## FIXME: pluggable subrequest handler?
+        ## FIXME: ZCA aptaperized subrequest handler
         subreq = self.build_external_subrequest(url, orig_req, log)
         subresp = subreq.get_response(proxy_exact_request)
         log.debug(self, 'External request for %s: %s content-type: %s',
