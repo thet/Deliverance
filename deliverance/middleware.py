@@ -17,7 +17,7 @@ from pygments import highlight as pygments_highlight
 from pygments.lexers import XmlLexer, HtmlLexer
 from pygments.formatters import HtmlFormatter
 from tempita import HTMLTemplate, html
-from lxml.etree import _Element, XMLSyntaxError
+from lxml.etree import _Element, XMLSyntaxError, XML
 from lxml.html import fromstring, document_fromstring, tostring, Element
 from deliverance.log import SavingLogger
 from deliverance.security import display_logging, display_local_files, edit_local_files
@@ -644,8 +644,6 @@ fp = open(os.path.join(os.path.dirname(__file__), 'media', 'clientside.js'))
 CLIENTSIDE_JAVASCRIPT = fp.read()
 del fp
 
-from lxml.etree import XML
-import urlparse
 
 class SubrequestRuleGetter(object):
     """
