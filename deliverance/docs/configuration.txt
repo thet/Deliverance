@@ -344,8 +344,8 @@ Including external content with ``href``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In addition to manipulating the theme and content documents, you can
-bring in content from a third source using the ``href`` attribute on a
-rule.
+bring in content from a third source using the ``href`` attribute on
+rule and theme elements.
 
 If you include ``href`` the document at that location is used instead
 of normal content document.  For example:
@@ -361,6 +361,32 @@ doesn't produce content on its own, or modify content in complex ways,
 but you can use includes like these to introduce several sources of
 dynamic content into a single page: ``/sidebar`` can be a dynamically
 generated page itself.
+
+Normally, when the url points back to deliverance itself, the resource is
+fetched from the proxied application directly to avoid circular recursions.
+Sometimes it might be necessary to refer back to deliverance and have
+deliverance apply all rules on it, as it was not a subrequest. For that, append
+a query string containing ``deliv_force_external`` to the url, like so:
+
+.. code-block:: xml
+
+    <append href="/sidebar?deliv_force_external=1" content="children:body"
+            theme="children:#sidebar" />
+
+You might also have to pass the request headers from the original request to
+the subrequest. For example to remain the browser session for the subrequest
+to stay logged in. Do it with appending ``deliv_full_headers`` to the query
+string:
+
+.. code-block:: xml
+
+    <append href="/sidebar?deliv_force_external=1;deliv_full_headers=1"
+            content="children:body"
+            theme="children:#sidebar" />
+
+Note, that you have to use a semicolon to seperate different query fields from
+each other. This is also standards complainant.
+
 
 Moving and copying
 ~~~~~~~~~~~~~~~~~~
