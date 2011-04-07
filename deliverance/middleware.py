@@ -205,8 +205,7 @@ document.cookie = 'jsEnabled=1; expires=__DATE__; path=/';
         Currently this is used only by RuleSet.get_theme
         """
         assert url is not None
-        force_external = \
-                'deliv_force_external' in urlparse.urlsplit(url).query or False
+        force_external = 'deliv_force_external' in urlparse.urlsplit(url).query
         if url.lower().startswith('file:'):
             if not display_local_files(orig_req):
                 ## FIXME: not sure if this applies generally; some
@@ -297,8 +296,7 @@ document.cookie = 'jsEnabled=1; expires=__DATE__; path=/';
         ``log``:
           The logging object
         """
-        full_headers =\
-                'deliv_full_headers' in urlparse.urlsplit(url).query or False
+        full_headers = 'deliv_full_headers' in urlparse.urlsplit(url).query
         if full_headers:
             return full_subrequest_builder(url, orig_req, log)
         else:
